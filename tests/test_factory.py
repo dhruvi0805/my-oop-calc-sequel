@@ -45,3 +45,27 @@ def test_invalid_name():
         assert False
     except ValueError:
         assert True
+
+def test_create_sqrt():
+    calculation =  CaculcationFactory.create("sqrt", 4)
+
+    assert isinstance(calculation, Calculation)
+    assert calculation.get_result() == 2
+
+def test_neg_sqrt():
+    calculation = CaculcationFactory.create("sqrt", -4)
+
+    assert isinstance(calculation, Calculation)
+
+    try:
+        calculation.get_result()
+        assert False
+    except ValueError:
+        assert True
+
+def test_wrong_operand_count():
+    try:
+        CaculcationFactory.create("sqrt", 4,9)
+        assert False
+    except ValueError:
+        assert True
