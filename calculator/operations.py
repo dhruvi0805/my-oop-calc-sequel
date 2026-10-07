@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, pow
 
 class Operations:
 
@@ -31,5 +31,15 @@ class Operations:
         if len(values) == 0:
             raise ValueError("Sum requires at least one value")
         return sum(values)
+
+    @staticmethod
+    def power(value,*,exponent =2):
+        return pow(value, exponent)
+
+    @staticmethod
+    def scale(value, *, factor=1):
+        if factor == 0:
+            raise ValueError("factor cannot be zero")
+        return value / factor
     
     
