@@ -30,6 +30,15 @@ def test_divide_no_execution():
 
     assert isinstance(calculation,Calculation)
 
+def test_divide_by_zero():
+    calculation = CaculcationFactory.create("divide", 3,0)
+
+    try:
+        calculation.get_result()
+        assert False
+    except ZeroDivisionError:
+        assert True
+
 def test_invalid_name():
     try:
         CaculcationFactory.create("banana",2,3)
