@@ -1,28 +1,16 @@
-from abc import ABC, abstractmethod
-from calculator.operations import Operations
+from math import isfinite
+from calculator.validation import numeric_value
 
-class calculation(ABC):
-    def __init__(self, a: float, b: float):
-        self.a = a
-        self.b = b
-    @abstractmethod
-    def get_result(self):
-        pass
+class Calculation():
+    def __init__(self, a, b, operation):
+        numbers = numeric_value([a,b])
+        self.a = numbers[0]
+        self.b = numbers[1]
+        self.operation = operation
 
-class Add(calculation):
     def get_result(self):
-        return Operations.add(self.a, self.b)
-
-class Subtract(calculation):
-    def get_result(self):
-        return self.a - self.b
-
-class Multiply(calculation):
-    def get_result(self):
-        return self.a * self.b
-
-class Divide(calculation):
-    def get_result(self):
-        if self.b == 0:
-            raise ValueError("Cannot divide by zero")
-        return self.a / self.b
+        result = self.operation(self.a, self.b)
+        
+        if not isfinite(result):
+            raise ValueError("Result must be finite")
+        return result
